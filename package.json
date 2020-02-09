@@ -1,0 +1,22 @@
+{
+  "name": "kubernetes-typescript",
+  "devDependencies": {
+    "@types/node": "^8.0.0",
+    "prettier": "^1.19.1",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2"
+  },
+  "dependencies": {
+    "@pulumi/kubernetes": "^1.0.0",
+    "@pulumi/kubernetesx": "^0.1.1",
+    "@pulumi/pulumi": "^1.0.0"
+  },
+  "scripts": {
+    "lint": "eslint src/**/*.ts"
+  }
+}
