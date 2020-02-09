@@ -18,8 +18,7 @@ export type StorageOptions = {
 export type PiholeInputs = {
   namespace: string;
   loadBalancerIP: string;
-  storageOptions: StorageOptions; np
-  
+  storageOptions: StorageOptions;
 };
 
 export class Pihole extends pulumi.ComponentResource {
@@ -29,7 +28,7 @@ export class Pihole extends pulumi.ComponentResource {
   public readonly services: k8s.core.v1.Service[] = [];
 
   constructor(name: string, args: PiholeInputs) {
-    super('rafaribe:HomeCluster:Pihole', name, {});
+    super('pulumi-pihole:Pihole', name, {});
     const config = new pulumi.Config();
     const appLabels = { app: name };
 
