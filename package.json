@@ -1,5 +1,6 @@
 {
-  "name": "kubernetes-typescript",
+  "name": "pulumi-pihole",
+  "version": "1.0.0",
   "devDependencies": {
     "@types/node": "^8.0.0",
     "prettier": "^1.19.1",
