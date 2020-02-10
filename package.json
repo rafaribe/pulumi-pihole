@@ -2,9 +2,22 @@
   "name": "pulumi-pihole",
   "version": "1.0.3",
   "license": "MIT",
+  "main": "bin/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rafaribe/pulumi-pihole.git"
+  },
+  "keywords": [
+    "pulumi",
+    "kubernetes",
+    "pihole",
+    "infrastructure-as-code",
+    "pulumi-kubernetes"
+  ],
+  "scripts": {
+    "lint": "yarn run eslint src/**/*.ts",
+    "build": "yarn run tsc",
+    "semantic-release": "yarn run semantic-release"
   },
   "devDependencies": {
     "@types/node": "^8.0.0",
@@ -23,10 +36,5 @@
     "@pulumi/kubernetesx": "^0.1.1",
     "@pulumi/pulumi": "^1.0.0",
     "typescript": "^3.7.5"
-  },
-  "scripts": {
-    "lint": "yarn run eslint src/**/*.ts",
-    "build": "yarn run tsc",
-    "semantic-release": "yarn run semantic-release"
   }
 }
