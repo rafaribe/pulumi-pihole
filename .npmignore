@@ -1,3 +1,5 @@
 /node_modules/
-/.yarn/
-.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
