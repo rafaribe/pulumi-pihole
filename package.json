@@ -1,6 +1,6 @@
 {
   "name": "pulumi-pihole",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "main": "bin/index.js",
   "repository": {
