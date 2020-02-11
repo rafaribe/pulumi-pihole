@@ -1,6 +1,6 @@
 {
   "name": "pulumi-pihole",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "main": "bin/index.js",
   "repository": {
@@ -15,9 +15,9 @@
     "pulumi-kubernetes"
   ],
   "scripts": {
-    "lint": "yarn run eslint src/**/*.ts",
-    "build": "yarn run tsc",
-    "semantic-release": "yarn run semantic-release"
+    "lint": "eslint src/**/*.ts",
+    "build": "tsc",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@types/node": "^8.0.0",
