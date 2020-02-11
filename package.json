@@ -1,7 +1,7 @@
 {
   "name": "pulumi-pihole",
   "description": "A Pulumi-kubernetes way of templating pihole manifests in typescript/javascript",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "license": "MIT",
   "main": "bin/index.js",
   "types": "bin/index.d.ts",
@@ -44,5 +44,7 @@
     "@pulumi/pulumi": "^1.0.0",
     "typescript": "^3.7.5"
   },
-  "files": ["bin/**/*"]
+  "files": [
+    "bin/**/*"
+  ]
 }
