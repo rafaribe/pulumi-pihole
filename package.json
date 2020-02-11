@@ -1,11 +1,17 @@
 {
   "name": "pulumi-pihole",
-  "version": "1.0.9",
+  "description": "A Pulumi-kubernetes way of templating pihole manifests in typescript/javascript",
+  "version": "1.0.10",
   "license": "MIT",
   "main": "bin/index.js",
+  "types": "bin/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/rafaribe/pulumi-pihole.git"
+  },
+  "author": "Rafael Ribeiro @rafaribe",
+  "bugs": {
+    "url": "https://github.com/rafaribe/pulumi-pihole/issues"
   },
   "keywords": [
     "pulumi",
@@ -16,6 +22,7 @@
   ],
   "scripts": {
     "lint": "eslint src/**/*.ts",
+    "format": "prettier --write \"src/**/*-ts\" \"bin/**/*.js\"",
     "build": "tsc",
     "semantic-release": "semantic-release"
   },
@@ -36,5 +43,6 @@
     "@pulumi/kubernetesx": "^0.1.1",
     "@pulumi/pulumi": "^1.0.0",
     "typescript": "^3.7.5"
-  }
+  },
+  "files": ["bin/**/*"]
 }

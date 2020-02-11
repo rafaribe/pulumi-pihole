@@ -1,21 +1,20 @@
 import * as k8s from '@pulumi/kubernetes';
 import * as pulumi from '@pulumi/pulumi';
-import { Provider } from '@pulumi/kubernetes';
 import { isEmpty } from './utils';
 import { PiholeInputs } from './types/piholeinputs';
 
-export class Pihole extends pulumi.ComponentResource {
+export class PiHole extends pulumi.ComponentResource {
   public readonly etcPersistentVolume: k8s.core.v1.PersistentVolume;
   public readonly dnsmasqPersistentVolume: k8s.core.v1.PersistentVolume;
   public readonly deployment: k8s.apps.v1.Deployment;
   public readonly services: k8s.core.v1.Service[] = [];
 
   constructor(name: string, args: PiholeInputs) {
-    super('pulumi-pihole:Pihole', name, {});
+    super('pulumi-pihole:PiHole', name, {});
 
-    let provider: Provider = new Provider('provider', {});
+    let provider: k8s.Provider = new k8s.Provider('provider', {});
     if (isEmpty(args.generateYAMLToFolder) == false)
-      provider = new Provider('provider', { renderYamlToDirectory: 'yaml' });
+      provider = new k8s.Provider('provider', { renderYamlToDirectory: 'yaml' });
 
     const config = new pulumi.Config();
     const appLabels = { app: name };
