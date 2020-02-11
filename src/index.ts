@@ -1,25 +1,8 @@
 import * as k8s from '@pulumi/kubernetes';
 import * as pulumi from '@pulumi/pulumi';
-
-export type LocalPaths = {
-  etcLocalPath: string;
-  dnsmasqLocalPath: string;
-};
-
-export type StorageOptions = {
-  storageClass: string;
-  storageNode: string;
-  storageSize: string;
-  accessModes: string[];
-  localVolumePaths: LocalPaths;
-  persistentVolumeReclaimPolicy: string;
-};
-
-export type PiholeInputs = {
-  namespace: string;
-  loadBalancerIP: string;
-  storageOptions: StorageOptions;
-};
+import { Provider } from '@pulumi/kubernetes';
+import { isEmpty } from './utils';
+import { PiholeInputs } from './types/piholeinputs';
 
 export class Pihole extends pulumi.ComponentResource {
   public readonly etcPersistentVolume: k8s.core.v1.PersistentVolume;
@@ -29,6 +12,11 @@ export class Pihole extends pulumi.ComponentResource {
 
   constructor(name: string, args: PiholeInputs) {
     super('pulumi-pihole:Pihole', name, {});
+
+    let provider: Provider = new Provider('provider', {});
+    if (isEmpty(args.generateYAMLToFolder) == false)
+      provider = new Provider('provider', { renderYamlToDirectory: 'yaml' });
+
     const config = new pulumi.Config();
     const appLabels = { app: name };
 
@@ -70,7 +58,7 @@ export class Pihole extends pulumi.ComponentResource {
           },
         },
       },
-      { parent: this }
+      { parent: this, provider: provider }
     );
 
     this.dnsmasqPersistentVolume = new k8s.core.v1.PersistentVolume(
@@ -108,7 +96,7 @@ export class Pihole extends pulumi.ComponentResource {
           },
         },
       },
-      { parent: this }
+      { parent: this, provider: provider }
     );
 
     const piholeEtcPVC = new k8s.core.v1.PersistentVolumeClaim(
@@ -126,7 +114,7 @@ export class Pihole extends pulumi.ComponentResource {
           selector: { matchLabels: this.etcPersistentVolume.metadata.labels },
         },
       },
-      { parent: this }
+      { parent: this, provider: provider }
     );
 
     const piholeDnsmasqPVC = new k8s.core.v1.PersistentVolumeClaim(
@@ -144,7 +132,7 @@ export class Pihole extends pulumi.ComponentResource {
           selector: { matchLabels: this.dnsmasqPersistentVolume.metadata.labels },
         },
       },
-      { parent: this }
+      { parent: this, provider: provider }
     );
 
     this.deployment = new k8s.apps.v1.Deployment(
@@ -212,7 +200,7 @@ export class Pihole extends pulumi.ComponentResource {
           },
         },
       },
-      { parent: this }
+      { parent: this, provider: provider }
     );
     //We need two services that share the same IP because kubernetes doesn't support UDP and TCP ports in the same service
     const tcpProtocol = 'TCP';
@@ -283,7 +271,7 @@ export class Pihole extends pulumi.ComponentResource {
             loadBalancerIP: args.loadBalancerIP,
           },
         },
-        { parent: this }
+        { parent: this, provider: provider }
       )
     );
     this.registerOutputs();
