@@ -1,7 +1,14 @@
+// Imports
 import * as k8s from '@pulumi/kubernetes';
 import { PiholeInputs } from './types/piholeinputs';
 import { ComponentResource, ComponentResourceOptions } from '@pulumi/pulumi';
 
+// Exports
+export * from './types/localpaths';
+export * from './types/piholeinputs';
+export * from './types/storageoptions';
+
+// Main class
 export class Pihole extends ComponentResource {
   private readonly etcPersistentVolume: k8s.core.v1.PersistentVolume;
   private readonly dnsmasqPersistentVolume: k8s.core.v1.PersistentVolume;
