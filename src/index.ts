@@ -4,9 +4,9 @@ import { PiholeInputs } from './types/piholeinputs';
 import { ComponentResource, ComponentResourceOptions } from '@pulumi/pulumi';
 
 // Exports
-export * from './types/localpaths';
-export * from './types/piholeinputs';
-export * from './types/storageoptions';
+export { LocalPaths } from './types/localpaths';
+export { PiholeInputs } from './types/piholeinputs';
+export { StorageOptions } from './types/storageoptions';
 
 // Main class
 export class Pihole extends ComponentResource {
