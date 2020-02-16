@@ -10,6 +10,7 @@ cache:
     - .pulumi/plugins
 before_script:
   - npm install
+  - pulumi stack init ${CI_COMMIT_REF_NAME}
 build_auto:
   stage: build
   script:
