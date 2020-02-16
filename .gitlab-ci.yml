@@ -5,12 +5,11 @@ variables:
   PULUMI_HOME: '$CI_PROJECT_DIR'
 before_script:
   - npm install
-  - pulumi stack init 'test'
+  - pulumi stack init ${CI_COMMIT_REF_NAME}
 build_auto:
   stage: build
   script:
-    - pulumi up --stack ${CI_COMMIT_REF_NAME} --non-interactive
-  environment:
-    name: ${CI_COMMIT_REF_NAME}
+    - pulumi stack select ${CI_COMMIT_REF_NAME}
+    - pulumi up -y --stack ${CI_COMMIT_REF_NAME}
   only:
     - master
