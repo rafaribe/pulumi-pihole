@@ -3,14 +3,9 @@ stages:
   - build
 variables:
   PULUMI_HOME: '$CI_PROJECT_DIR'
-cache:
-  key: 'cache-${CI_COMMIT_REF_SLUG}'
-  paths:
-    - node_modules/
-    - .pulumi/plugins
 before_script:
   - npm install
-  - pulumi stack init ${CI_COMMIT_REF_NAME}
+  - pulumi stack init 'test'
 build_auto:
   stage: build
   script:
