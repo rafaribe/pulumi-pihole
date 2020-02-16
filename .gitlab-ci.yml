@@ -11,11 +11,10 @@ cache:
 before_script:
   - npm install
 build_auto:
-  stage: deploy
+  stage: build
   script:
     - pulumi up --stack ${CI_COMMIT_REF_NAME} --non-interactive
   environment:
     name: ${CI_COMMIT_REF_NAME}
-    on_stop: stop_env
   only:
     - master
