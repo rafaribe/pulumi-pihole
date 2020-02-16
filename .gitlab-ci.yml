@@ -5,6 +5,7 @@ variables:
   PULUMI_HOME: '$CI_PROJECT_DIR'
 before_script:
   - npm install
+  - pulumi login -l
   - pulumi stack init ${CI_COMMIT_REF_NAME}
 build_auto:
   stage: build
