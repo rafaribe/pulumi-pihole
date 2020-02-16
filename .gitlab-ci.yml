@@ -1,0 +1,21 @@
+image: rafaribe/pulumi-ci:1
+stages:
+  - build
+variables:
+  PULUMI_HOME: '$CI_PROJECT_DIR'
+cache:
+  key: 'cache-${CI_COMMIT_REF_SLUG}'
+  paths:
+    - node_modules/
+    - .pulumi/plugins
+before_script:
+  - npm install
+build_auto:
+  stage: deploy
+  script:
+    - pulumi up --stack ${CI_COMMIT_REF_NAME} --non-interactive
+  environment:
+    name: ${CI_COMMIT_REF_NAME}
+    on_stop: stop_env
+  only:
+    - master
